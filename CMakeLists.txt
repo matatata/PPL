@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 if(NOT CMAKE_DEBUG_POSTFIX)
   set(CMAKE_DEBUG_POSTFIX d)
@@ -49,9 +49,9 @@ else()
         WIN32_LEAN_AND_MEAN
         GLEW_STATIC=1)
     set(PLATFORM_INCLUDE_DIRECTORIES
-        include/glew/include
-        include/openal-soft/include
-        include/freetype2/include)
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/glew/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/openal-soft/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/freetype2/include)
     set(PLATFORM_DEBUG_OPTIONS "-MTd")
     set(PLATFORM_RELEASE_OPTIONS "-MT")
 endif()
@@ -64,9 +64,9 @@ set(DEFINITIONS
     XPLM301=1
     ${PLATFORM_CORE_DEFINITIONS})
 
-include_directories(${CMAKE_SOURCE_DIR}/../SDK/CHeaders/XPLM
-                    ${CMAKE_SOURCE_DIR}/../SDK/CHeaders/Widgets
-                    ${CMAKE_SOURCE_DIR}/include/simpleini
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../SDK/CHeaders/XPLM
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../SDK/CHeaders/Widgets
+                    ${CMAKE_CURRENT_SOURCE_DIR}/include/simpleini
                     ${PLATFORM_INCLUDE_DIRECTORIES})
 
 
@@ -88,7 +88,31 @@ set(SOURCES
     src/alsoundbuffer.cpp
     src/alcontextmanager.cpp
     src/alcontextchanger.cpp
-    src/fontmgr.cpp)
+    src/fontmgr.cpp
+
+src/action.h
+src/alcontextchanger.h
+src/alcontextmanager.h
+src/alsoundbuffer.h
+src/basics.h
+src/dataref.h
+src/fontmgr.h
+src/log.h
+src/logichandler.h
+src/logwriter.h
+src/menuitem.h
+src/messagewindow.h
+src/onscreendisplay.h
+src/overlaygauge.h
+src/owneddata.h
+src/pluginpath.h
+src/processor.h
+src/settings.h
+src/smoothed.h
+src/texture.h
+
+
+)
 
 
 add_library(PPL STATIC ${SOURCES})
